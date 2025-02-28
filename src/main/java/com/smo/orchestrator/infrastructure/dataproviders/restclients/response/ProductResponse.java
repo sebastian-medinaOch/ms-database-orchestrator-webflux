@@ -1,4 +1,4 @@
-package com.smo.orchestrator.infrastructure.dataproviders.restclients.dto;
+package com.smo.orchestrator.infrastructure.dataproviders.restclients.response;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class Product {
+public class ProductResponse {
 
     private String id;
     private String name;
