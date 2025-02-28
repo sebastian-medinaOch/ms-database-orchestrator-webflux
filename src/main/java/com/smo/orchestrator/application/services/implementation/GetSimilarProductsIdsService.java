@@ -6,7 +6,7 @@ import com.smo.orchestrator.application.services.interfaces.IGetSimilarProductsI
 import com.smo.orchestrator.domain.ports.in.IGetSimilarProductsIdsUseCaseIn;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
-import reactor.core.publisher.Mono;
+import reactor.core.publisher.Flux;
 
 @RequiredArgsConstructor
 @Component
@@ -16,7 +16,7 @@ public class GetSimilarProductsIdsService implements IGetSimilarProductsIds {
     private final ObjectMapper objectMapper;
 
     @Override
-    public Mono<Object> get(String productId) {
+    public Flux<Object> get(String productId) {
         return iGetSimilarProductsIdsUseCaseIn.get(productId)
                 .map(products -> objectMapper.convertValue(products, DataResponse.class));
     }

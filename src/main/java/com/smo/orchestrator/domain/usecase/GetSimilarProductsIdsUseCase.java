@@ -1,12 +1,11 @@
 package com.smo.orchestrator.domain.usecase;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.smo.orchestrator.domain.models.response.DataResponseModel;
 import com.smo.orchestrator.domain.ports.in.IGetSimilarProductsIdsUseCaseIn;
 import com.smo.orchestrator.domain.ports.on.IGetSimilarProductsIdsUseCaseOn;
 import com.smo.orchestrator.infrastructure.dataproviders.restclients.dto.Product;
 import lombok.RequiredArgsConstructor;
-import reactor.core.publisher.Mono;
+import reactor.core.publisher.Flux;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,13 +14,11 @@ import java.util.List;
 public class GetSimilarProductsIdsUseCase implements IGetSimilarProductsIdsUseCaseIn {
 
     private final IGetSimilarProductsIdsUseCaseOn iGetSimilarProductsIdsUseCaseOn;
-    private final ObjectMapper objectMapper;
 
     @Override
-    public Mono<DataResponseModel> get(String productId) {
+    public Flux<DataResponseModel> get(String productId) {
         return iGetSimilarProductsIdsUseCaseOn.getProducts(productId)
                 .map(this::buildData)
-                .collectList()
                 .map(data -> DataResponseModel.builder().data(data).build());
     }
 

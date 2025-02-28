@@ -1,7 +1,7 @@
 package com.smo.orchestrator.application.services.interfaces;
 
-import reactor.core.publisher.Mono;
+import reactor.core.publisher.Flux;
 
 public interface IGetSimilarProductsIds {
-    Mono<Object> get(String productId);
+    Flux<Object> get(String productId);
 }
