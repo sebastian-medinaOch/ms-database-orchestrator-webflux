@@ -1,36 +1,31 @@
 package com.smo.orchestrator.infrastructure.dataproviders.restclients.implementation;
 
 import com.smo.orchestrator.domain.ports.on.IGetSimilarProductsIdsUseCaseOn;
-import com.smo.orchestrator.infrastructure.dataproviders.restclients.response.ProductResponse;
-import com.smo.orchestrator.infrastructure.dataproviders.restclients.response.SimilarProductsIdsResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Component;
 import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Flux;
-import reactor.core.publisher.Mono;
 
 @Component
 @RequiredArgsConstructor
 public class ProductRestClient implements IGetSimilarProductsIdsUseCaseOn {
 
     private final Environment environment;
-    private final WebClient.Builder webClientBuilder;
+    private final WebClient webClientBuilder;
 
     @Override
-    public Flux<SimilarProductsIdsResponse> getProducts(String productId) {
+    public Flux<Integer> getProducts(String productId) {
         return webClientBuilder
-                .baseUrl("http://localhost:3001") // Define la URL base
-                .build()
                 .get()
-                .uri("/product/{productId}/similarids", productId) // Endpoint dinámico con el ID
+                .uri("/product/{productId}/similarids", productId) // URL con parámetro dinámico
                 .retrieve()
-                .bodyToFlux(SimilarProductsIdsResponse.class)
-                .switchIfEmpty(Mono.error(new Throwable()));
+                .bodyToFlux(Integer.class) // El servicio devuelve una lista de enteros
+                .switchIfEmpty(Flux.empty()); //
     }
 
 
-    private Mono<ProductResponse> getProductDetailId(String productId) {
+   /* private Mono<ProductResponse> getProductDetailId(String productId) {
         return webClientBuilder
                 .baseUrl("http://localhost:3001")
                 .build()
@@ -40,6 +35,6 @@ public class ProductRestClient implements IGetSimilarProductsIdsUseCaseOn {
                 .bodyToMono(ProductResponse.class)
                 .switchIfEmpty(Mono.error(new Throwable()));
 
-    }
+    }*/
 
 }

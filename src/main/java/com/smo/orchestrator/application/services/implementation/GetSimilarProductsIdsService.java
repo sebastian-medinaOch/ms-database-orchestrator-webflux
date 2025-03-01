@@ -5,11 +5,11 @@ import com.smo.orchestrator.application.response.DataResponse;
 import com.smo.orchestrator.application.services.interfaces.IGetSimilarProductsIds;
 import com.smo.orchestrator.domain.ports.in.IGetSimilarProductsIdsUseCaseIn;
 import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
 
 @RequiredArgsConstructor
-@Component
+@Service
 public class GetSimilarProductsIdsService implements IGetSimilarProductsIds {
 
     private final IGetSimilarProductsIdsUseCaseIn iGetSimilarProductsIdsUseCaseIn;
@@ -18,7 +18,7 @@ public class GetSimilarProductsIdsService implements IGetSimilarProductsIds {
     @Override
     public Flux<Object> get(String productId) {
         return iGetSimilarProductsIdsUseCaseIn.get(productId)
-                .map(products -> objectMapper.convertValue(products, DataResponse.class));
+                .map(products -> objectMapper.convertValue(products, DataResponse.class).getData());
     }
 
 }

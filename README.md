@@ -59,11 +59,9 @@ Esta sección describe los campos que se utilizan en las peticiones y respuestas
 * * **Código 200:** "Ok":
      ```json lines
         [
-            [
-                "1",
-                "2",
-                "3"
-            ]
+            "1",
+            "2",
+            "3"    
         ]
     ```
 * * **Código 400:** "Bad Request":

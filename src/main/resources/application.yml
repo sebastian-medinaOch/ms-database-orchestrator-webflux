@@ -3,6 +3,8 @@ server:
 spring:
   application:
     name: ms-database-orchestrator-webflux
+  profiles:
+    active: local
 
 management:
   endpoints:
