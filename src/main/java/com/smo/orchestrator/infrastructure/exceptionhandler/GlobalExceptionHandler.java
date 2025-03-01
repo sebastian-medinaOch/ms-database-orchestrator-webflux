@@ -17,7 +17,7 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(BussinessException.class)
     public ResponseEntity<Mono<AnswerException>> handleBussinessException(BussinessException exception) {
-        log.error("Error controlado: {}", exception.getMessage());
+        log.error("Error controlado: {}", exception.getDetail());
         return ResponseEntity
                 .status(exception.getStatus())
                 .body(Mono.just(new AnswerException(String.valueOf(exception.getStatus().value()), exception.getDetail())));

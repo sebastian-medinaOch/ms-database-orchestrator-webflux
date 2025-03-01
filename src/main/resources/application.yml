@@ -5,8 +5,6 @@ spring:
     name: ms-database-orchestrator-webflux
   profiles:
     active: local
-  main:
-    web-application-type: "reactive"
 
 management:
   endpoints:
