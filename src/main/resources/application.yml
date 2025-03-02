@@ -48,3 +48,8 @@ springdoc:
     path: /v3/api-docs
   swagger-ui:
     path: /swagger-ui.html
+
+api:
+  rest:
+    product:
+      url-base-path: ${URL_BASE_PATH:http://localhost:3001}

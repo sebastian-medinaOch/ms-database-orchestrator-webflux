@@ -17,7 +17,7 @@ public class InfrastructureConstants {
     public static final String MESSAGE_ERROR_GET_PRODUCT_NOT_FOUND = "No se encontró ningun regristro bajo ese productId";
 
     //Config
-    public static final String CONFIG_BASE_URL_WEB_CLIENT_PRODUCT = "http://localhost:3001";
+    public static final String CONFIG_BASE_URL_WEB_CLIENT_PRODUCT = "api.rest.product.url-base-path";
     public static final String CONFIG_URI_GET_PRODUCTS_WEB_CLIENT = "/product/{productId}/similarids";
     public static final String CONFIG_URI_GET_PRODUCT_WEB_CLIENT = "/product/{productId}";
     public static final String CONFIG_CACHE_PRODUCT = "product";
