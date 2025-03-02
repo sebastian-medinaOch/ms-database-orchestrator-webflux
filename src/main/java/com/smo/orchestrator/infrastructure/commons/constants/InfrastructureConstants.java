@@ -20,6 +20,8 @@ public class InfrastructureConstants {
     public static final String CONFIG_BASE_URL_WEB_CLIENT_PRODUCT = "http://localhost:3001";
     public static final String CONFIG_URI_GET_PRODUCTS_WEB_CLIENT = "/product/{productId}/similarids";
     public static final String CONFIG_URI_GET_PRODUCT_WEB_CLIENT = "/product/{productId}";
+    public static final String CONFIG_CACHE_PRODUCT = "product";
+    public static final String CONFIG_BEAN_CACHE = "cacheProduct";
 
     //Log
     public static final String LOG_EXCEPTION_BUSSINESS_EXCEPTION = "Error controlado: MessageId: {}, ErrorMessage: {}";
