@@ -23,13 +23,12 @@ public class EndpointGetSimilarProductsIds {
     private final Utility utility;
 
     @GetMapping(value = "/{productId}/similarids")
-    public Flux<Object> get(@PathVariable("productId") String productId,
-                            @RequestHeader(value = "messageId") String messageId) {
+    public Flux<Object> getSimilarProductsIds(@PathVariable("productId") String productId,
+                                              @RequestHeader(value = "messageId") String messageId) {
 
         return utility.validateData(productId, messageId)
                 .thenMany(iGetSimilarProductsIds.get(productId))
                 .map(data -> new AnswerData(DataResponse.builder().data(data).build()).getDataResponse().getData());
     }
-
 
 }

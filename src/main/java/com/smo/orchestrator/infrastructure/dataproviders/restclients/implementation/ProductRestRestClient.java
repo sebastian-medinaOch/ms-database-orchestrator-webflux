@@ -1,7 +1,10 @@
 package com.smo.orchestrator.infrastructure.dataproviders.restclients.implementation;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.smo.orchestrator.domain.exceptions.BussinessException;
-import com.smo.orchestrator.domain.ports.on.IGetSimilarProductsIdsUseCaseOn;
+import com.smo.orchestrator.domain.models.response.ProductResponseModel;
+import com.smo.orchestrator.domain.ports.on.IProductRestOn;
+import com.smo.orchestrator.infrastructure.dataproviders.restclients.response.ProductResponseClient;
 import lombok.RequiredArgsConstructor;
 import org.springframework.core.env.Environment;
 import org.springframework.http.HttpStatus;
@@ -13,10 +16,11 @@ import reactor.core.publisher.Mono;
 
 @Component
 @RequiredArgsConstructor
-public class ProductRestClient implements IGetSimilarProductsIdsUseCaseOn {
+public class ProductRestRestClient implements IProductRestOn {
 
     private final Environment environment;
     private final WebClient webClientBuilder;
+    private final ObjectMapper objectMapper;
 
     @Override
     public Flux<Integer> getProducts(String productId) {
@@ -33,18 +37,19 @@ public class ProductRestClient implements IGetSimilarProductsIdsUseCaseOn {
                 .switchIfEmpty(Flux.empty()); //
     }
 
-
-
-   /* private Mono<ProductResponse> getProductDetailId(String productId) {
+    public Mono<ProductResponseModel> getProduct(String productId) {
         return webClientBuilder
-                .baseUrl("http://localhost:3001")
-                .build()
                 .get()
                 .uri("/product/{productId}", productId)
                 .retrieve()
-                .bodyToMono(ProductResponse.class)
-                .switchIfEmpty(Mono.error(new Throwable()));
-
-    }*/
+                .onStatus(HttpStatusCode::is4xxClientError, response ->
+                        response.statusCode().equals(HttpStatus.NOT_FOUND)
+                                ? Mono.error(new BussinessException(HttpStatus.NOT_FOUND, "No se encontró ningun regristro bajo ese productId"))
+                                : response.createException().flatMap(Mono::error)
+                )
+                .bodyToMono(ProductResponseClient.class)
+                .map(data -> objectMapper.convertValue(data, ProductResponseModel.class))
+                .switchIfEmpty(Mono.empty());
+    }
 
 }

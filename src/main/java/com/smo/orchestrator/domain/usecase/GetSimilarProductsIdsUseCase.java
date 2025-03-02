@@ -2,7 +2,7 @@ package com.smo.orchestrator.domain.usecase;
 
 import com.smo.orchestrator.domain.models.response.DataResponseModel;
 import com.smo.orchestrator.domain.ports.in.IGetSimilarProductsIdsUseCaseIn;
-import com.smo.orchestrator.domain.ports.on.IGetSimilarProductsIdsUseCaseOn;
+import com.smo.orchestrator.domain.ports.on.IProductRestOn;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import reactor.core.publisher.Flux;
@@ -11,13 +11,12 @@ import reactor.core.publisher.Flux;
 @Component
 public class GetSimilarProductsIdsUseCase implements IGetSimilarProductsIdsUseCaseIn {
 
-    private final IGetSimilarProductsIdsUseCaseOn iGetSimilarProductsIdsUseCaseOn;
+    private final IProductRestOn iProductRestOn;
 
     @Override
     public Flux<DataResponseModel> get(String productId) {
-        return iGetSimilarProductsIdsUseCaseOn.getProducts(productId)
+        return iProductRestOn.getProducts(productId)
                 .map(data -> DataResponseModel.builder().data(data).build());
     }
-
 
 }
