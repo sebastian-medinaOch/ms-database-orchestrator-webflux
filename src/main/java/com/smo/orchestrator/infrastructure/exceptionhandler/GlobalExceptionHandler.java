@@ -17,7 +17,6 @@ import static com.smo.orchestrator.infrastructure.commons.constants.Infrastructu
 import static com.smo.orchestrator.infrastructure.commons.constants.InfrastructureConstants.LOG_EXCEPTION_ILLEGAL_ARGUMENT_EXCEPTION;
 import static com.smo.orchestrator.infrastructure.commons.constants.InfrastructureConstants.LOG_EXCEPTION_NO_RESOURCE_FOUND_EXCEPTION;
 import static com.smo.orchestrator.infrastructure.commons.constants.InfrastructureConstants.LOG_EXCEPTION_RESPONSE_STATUS_EXCEPTION;
-import static com.smo.orchestrator.infrastructure.commons.constants.InfrastructureConstants.MESSAGE_ERROR_EXCEPTION;
 import static com.smo.orchestrator.infrastructure.commons.constants.InfrastructureConstants.REQUEST_HEADER_MESSAGE_ID;
 
 @Log4j2
@@ -25,43 +24,38 @@ import static com.smo.orchestrator.infrastructure.commons.constants.Infrastructu
 public class GlobalExceptionHandler {
 
     @ExceptionHandler(BussinessException.class)
-    public ResponseEntity<Mono<AnswerException>> handleBussinessException(BussinessException exception, ServerWebExchange request) {
-        log.error(LOG_EXCEPTION_BUSSINESS_EXCEPTION, request.getRequest().getHeaders().getFirst(REQUEST_HEADER_MESSAGE_ID), exception.getDetail());
-        return ResponseEntity
-                .status(exception.getStatus())
-                .body(Mono.just(new AnswerException(String.valueOf(exception.getStatus().value()), exception.getDetail())));
+    public Mono<ResponseEntity<Mono<AnswerException>>> handleBussinessException(BussinessException exception, ServerWebExchange exchange) {
+        return logAndBuildResponse(LOG_EXCEPTION_BUSSINESS_EXCEPTION, exception.getStatus(), exception.getDetail(), exchange);
     }
 
     @ExceptionHandler(IllegalArgumentException.class)
-    public ResponseEntity<Mono<AnswerException>> handleIllegalArgumentException(IllegalArgumentException exception, ServerWebExchange request) {
-        log.error(LOG_EXCEPTION_ILLEGAL_ARGUMENT_EXCEPTION, request.getRequest().getHeaders().getFirst(REQUEST_HEADER_MESSAGE_ID), exception.getMessage());
-        return ResponseEntity
-                .status(HttpStatus.BAD_REQUEST)
-                .body(Mono.just(new AnswerException(String.valueOf(HttpStatus.BAD_REQUEST.value()), exception.getMessage())));
+    public Mono<ResponseEntity<Mono<AnswerException>>> handleIllegalArgumentException(IllegalArgumentException exception, ServerWebExchange exchange) {
+        return logAndBuildResponse(LOG_EXCEPTION_ILLEGAL_ARGUMENT_EXCEPTION, HttpStatus.BAD_REQUEST, exception.getMessage(), exchange);
     }
 
     @ExceptionHandler(NoResourceFoundException.class)
-    public ResponseEntity<Mono<AnswerException>> handleNoResourceFoundException(NoResourceFoundException exception, ServerWebExchange request) {
-        log.error(LOG_EXCEPTION_NO_RESOURCE_FOUND_EXCEPTION, request.getRequest().getHeaders().getFirst(REQUEST_HEADER_MESSAGE_ID), exception.getMessage());
-        return ResponseEntity
-                .status(HttpStatus.NOT_FOUND)
-                .body(Mono.just(new AnswerException(String.valueOf(HttpStatus.NOT_FOUND.value()), exception.getReason())));
+    public Mono<ResponseEntity<Mono<AnswerException>>> handleNoResourceFoundException(NoResourceFoundException exception, ServerWebExchange exchange) {
+        return logAndBuildResponse(LOG_EXCEPTION_NO_RESOURCE_FOUND_EXCEPTION, HttpStatus.NOT_FOUND, exception.getReason(), exchange);
     }
 
     @ExceptionHandler(ResponseStatusException.class)
-    public ResponseEntity<Mono<AnswerException>> handleResponseStatusException(ResponseStatusException exception, ServerWebExchange request) {
-        log.error(LOG_EXCEPTION_RESPONSE_STATUS_EXCEPTION, request.getRequest().getHeaders().getFirst(REQUEST_HEADER_MESSAGE_ID), exception.getMessage());
-        return ResponseEntity
-                .status(exception.getStatusCode())
-                .body(Mono.just(new AnswerException(String.valueOf(exception.getStatusCode().value()), exception.getReason())));
+    public Mono<ResponseEntity<Mono<AnswerException>>> handleResponseStatusException(ResponseStatusException exception, ServerWebExchange exchange) {
+        return logAndBuildResponse(LOG_EXCEPTION_RESPONSE_STATUS_EXCEPTION, HttpStatus.valueOf(exception.getStatusCode().value()), exception.getReason(), exchange);
     }
 
     @ExceptionHandler(Exception.class)
-    public ResponseEntity<Mono<AnswerException>> handleGeneralException(Exception exception, ServerWebExchange request) {
-        log.error(LOG_EXCEPTION_EXCEPTION, request.getRequest().getHeaders().getFirst(REQUEST_HEADER_MESSAGE_ID), exception.getMessage());
-        return ResponseEntity
-                .status(HttpStatus.INTERNAL_SERVER_ERROR)
-                .body(Mono.just(new AnswerException(String.valueOf(HttpStatus.INTERNAL_SERVER_ERROR.value()), MESSAGE_ERROR_EXCEPTION)));
+    public Mono<ResponseEntity<Mono<AnswerException>>> handleGeneralException(Exception exception, ServerWebExchange exchange) {
+        return logAndBuildResponse(LOG_EXCEPTION_EXCEPTION, HttpStatus.INTERNAL_SERVER_ERROR, exception.getMessage(), exchange);
     }
 
+    private String getMessageId(ServerWebExchange exchange) {
+        return exchange.getRequest().getHeaders().getFirst(REQUEST_HEADER_MESSAGE_ID);
+    }
+
+    private Mono<ResponseEntity<Mono<AnswerException>>> logAndBuildResponse(String logMessage, HttpStatus status, String errorDetail, ServerWebExchange exchange) {
+        String messageId = getMessageId(exchange);
+        log.error(logMessage, messageId, errorDetail);
+        return Mono.just(ResponseEntity.status(status)
+                .body(Mono.just(new AnswerException(String.valueOf(status.value()), errorDetail))));
+    }
 }
