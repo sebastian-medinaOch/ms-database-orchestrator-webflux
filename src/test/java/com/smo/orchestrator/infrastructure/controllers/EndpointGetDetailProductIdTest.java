@@ -1,7 +1,6 @@
 package com.smo.orchestrator.infrastructure.controllers;
 
 import com.smo.orchestrator.application.services.interfaces.IGetDetailProductId;
-import com.smo.orchestrator.domain.exceptions.BussinessException;
 import com.smo.orchestrator.infrastructure.commons.utility.Utility;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -15,7 +14,6 @@ import org.springframework.test.web.reactive.server.WebTestClient;
 import reactor.core.publisher.Mono;
 import reactor.test.StepVerifier;
 
-import static com.smo.orchestrator.infrastructure.commons.constants.InfrastructureConstants.MESSAGE_ERROR_PRODUCT_ID_EMPTY;
 import static com.smo.orchestrator.infrastructure.commons.constants.InfrastructureConstants.PATH_GET_DETAIL_PRODUCT_ID_CONTROLLER;
 import static com.smo.orchestrator.infrastructure.commons.constants.InfrastructureConstants.PATH_PRODUCT_CONTROLLER;
 import static com.smo.orchestrator.infrastructure.commons.constants.InfrastructureConstants.REQUEST_HEADER_MESSAGE_ID;
