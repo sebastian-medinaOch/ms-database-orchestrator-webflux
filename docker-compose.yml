@@ -21,7 +21,8 @@ services:
       - GF_AUTH_ANONYMOUS_ENABLED=true
       - GF_AUTH_BASIC_ENABLED=false
     volumes:
-      - ./shared/grafana:/etc/grafana/provisioning/
+      - ./shared/grafana/datasource:/etc/grafana/provisioning/datasources
+      - ./shared/grafana/dashboards:/etc/grafana/provisioning/dashboards
   simulado:
     image: ldabiralai/simulado:latest
     ports:
