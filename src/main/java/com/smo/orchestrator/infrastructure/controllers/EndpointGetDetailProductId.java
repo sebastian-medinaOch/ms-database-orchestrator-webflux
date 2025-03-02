@@ -18,7 +18,7 @@ import static com.smo.orchestrator.infrastructure.commons.constants.Infrastructu
 import static com.smo.orchestrator.infrastructure.commons.constants.InfrastructureConstants.PATH_GET_DETAIL_PRODUCT_ID_CONTROLLER;
 import static com.smo.orchestrator.infrastructure.commons.constants.InfrastructureConstants.PATH_PRODUCT_CONTROLLER;
 import static com.smo.orchestrator.infrastructure.commons.constants.InfrastructureConstants.PATH_VARIABLE_PRODUCT_ID;
-import static com.smo.orchestrator.infrastructure.commons.constants.InfrastructureConstants.REQUEST_HEADER_PRODUCT_ID;
+import static com.smo.orchestrator.infrastructure.commons.constants.InfrastructureConstants.REQUEST_HEADER_MESSAGE_ID;
 
 @Log4j2
 @RestController
@@ -31,7 +31,7 @@ public class EndpointGetDetailProductId {
 
     @GetMapping(value = PATH_GET_DETAIL_PRODUCT_ID_CONTROLLER)
     public Mono<Object> getDetailProductId(@PathVariable(PATH_VARIABLE_PRODUCT_ID) String productId,
-                                           @RequestHeader(value = REQUEST_HEADER_PRODUCT_ID) String messageId) {
+                                           @RequestHeader(value = REQUEST_HEADER_MESSAGE_ID) String messageId) {
 
         return utility.validateData(productId, messageId)
                 .doFirst(() -> log.info(LOG_INFO_CONTROLLER_GET_DETAIL_PRODUCT_ID, messageId, productId))

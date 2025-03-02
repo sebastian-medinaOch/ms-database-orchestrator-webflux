@@ -9,7 +9,7 @@ public class InfrastructureConstants {
 
     //Paths ands headers
     public static final String PATH_VARIABLE_PRODUCT_ID = "productId";
-    public static final String REQUEST_HEADER_PRODUCT_ID = "messageId";
+    public static final String REQUEST_HEADER_MESSAGE_ID = "messageId";
 
     //MessageError
     public static final String MESSAGE_ERROR_PRODUCT_ID_EMPTY = "El parámetro 'productId' es requerido";
@@ -23,12 +23,12 @@ public class InfrastructureConstants {
     public static final String CONFIG_URI_GET_PRODUCT_WEB_CLIENT = "/product/{productId}";
 
     //Log
-    public static final String LOG_EXCEPTION_BUSSINESS_EXCEPTION = "Error controlado: {}";
-    public static final String LOG_EXCEPTION_ILLEGAL_ARGUMENT_EXCEPTION = "Parámetro inválido: {}";
-    public static final String LOG_EXCEPTION_NO_RESOURCE_FOUND_EXCEPTION = "Error en la URL: {}";
-    public static final String LOG_EXCEPTION_RESPONSE_STATUS_EXCEPTION = "Error HTTP: {}";
-    public static final String LOG_EXCEPTION_EXCEPTION = "Error inesperado: {}";
-    public static final String LOG_INFO_CONTROLLER_GET_DETAIL_PRODUCT_ID= "Se inicia el proceso para obtener el detalle del producto. MessageId: {} , ProductId: {}";
-    public static final String LOG_INFO_CONTROLLER_GET_DETAIL_PRODUCT_ID_SUCCESS= "Se finalizó el proceso para obtener el detalle del producto. MessageId: {} , ProductId: {}";
+    public static final String LOG_EXCEPTION_BUSSINESS_EXCEPTION = "Error controlado: MessageId: {}, ErrorMessage: {}";
+    public static final String LOG_EXCEPTION_ILLEGAL_ARGUMENT_EXCEPTION = "Parámetro inválido: MessageId: {}, ErrorMessage: {}";
+    public static final String LOG_EXCEPTION_NO_RESOURCE_FOUND_EXCEPTION = "Error en la URL: MessageId: {}, ErrorMessage: {}";
+    public static final String LOG_EXCEPTION_RESPONSE_STATUS_EXCEPTION = "Error HTTP: MessageId: {}, ErrorMessage: {}";
+    public static final String LOG_EXCEPTION_EXCEPTION = "Error inesperado: MessageId: {}, ErrorMessage: {}";
+    public static final String LOG_INFO_CONTROLLER_GET_DETAIL_PRODUCT_ID = "Se inicia el proceso para obtener el detalle del producto. MessageId: {} , ProductId: {}";
+    public static final String LOG_INFO_CONTROLLER_GET_DETAIL_PRODUCT_ID_SUCCESS = "Se finalizó el proceso para obtener el detalle del producto. MessageId: {} , ProductId: {}";
 
 }
