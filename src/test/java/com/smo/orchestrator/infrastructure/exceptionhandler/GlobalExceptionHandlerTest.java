@@ -19,6 +19,8 @@ import org.springframework.web.server.ServerWebExchange;
 import reactor.core.publisher.Mono;
 import reactor.test.StepVerifier;
 
+import java.util.Objects;
+
 import static com.smo.orchestrator.infrastructure.commons.constants.InfrastructureConstants.REQUEST_HEADER_MESSAGE_ID;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
@@ -55,7 +57,7 @@ class GlobalExceptionHandlerTest {
         StepVerifier.create(result)
                 .assertNext(response -> {
                     assert response.getStatusCode() == HttpStatus.BAD_REQUEST;
-                    assert response.getBody().subscribe(answer -> answer.getMessage().equals("Error de negocio")).isDisposed();
+                    assert Objects.requireNonNull(response.getBody()).subscribe(answer -> answer.getMessage().equals("Error de negocio")).isDisposed();
                 })
                 .verifyComplete();
     }
@@ -69,7 +71,7 @@ class GlobalExceptionHandlerTest {
         StepVerifier.create(result)
                 .assertNext(response -> {
                     assert response.getStatusCode() == HttpStatus.BAD_REQUEST;
-                    assert response.getBody().subscribe(answer -> answer.getMessage().equals("Parámetro inválido")).isDisposed();
+                    assert Objects.requireNonNull(response.getBody()).subscribe(answer -> answer.getMessage().equals("Parámetro inválido")).isDisposed();
                 })
                 .verifyComplete();
     }
@@ -83,7 +85,7 @@ class GlobalExceptionHandlerTest {
         StepVerifier.create(result)
                 .assertNext(response -> {
                     assert response.getStatusCode() == HttpStatus.NOT_FOUND;
-                    assert response.getBody().subscribe(answer -> answer.getMessage().equals("Recurso no encontrado")).isDisposed();
+                    assert Objects.requireNonNull(response.getBody()).subscribe(answer -> answer.getMessage().equals("Recurso no encontrado")).isDisposed();
                 })
                 .verifyComplete();
     }
@@ -97,7 +99,7 @@ class GlobalExceptionHandlerTest {
         StepVerifier.create(result)
                 .assertNext(response -> {
                     assert response.getStatusCode() == HttpStatus.UNAUTHORIZED;
-                    assert response.getBody().subscribe(answer -> answer.getMessage().equals("No autorizado")).isDisposed();
+                    assert Objects.requireNonNull(response.getBody()).subscribe(answer -> answer.getMessage().equals("No autorizado")).isDisposed();
                 })
                 .verifyComplete();
     }
@@ -111,7 +113,7 @@ class GlobalExceptionHandlerTest {
         StepVerifier.create(result)
                 .assertNext(response -> {
                     assert response.getStatusCode() == HttpStatus.INTERNAL_SERVER_ERROR;
-                    assert response.getBody().subscribe(answer -> answer.getMessage().equals("Error inesperado")).isDisposed();
+                    assert Objects.requireNonNull(response.getBody()).subscribe(answer -> answer.getMessage().equals("Error inesperado")).isDisposed();
                 })
                 .verifyComplete();
     }
