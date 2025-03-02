@@ -14,7 +14,6 @@ public class InfrastructureConstants {
     //MessageError
     public static final String MESSAGE_ERROR_PRODUCT_ID_EMPTY = "El parámetro 'productId' es requerido";
     public static final String MESSAGE_ERROR_MESSAGE_ID_EMPTY = "El header 'messageId' es requerido";
-    public static final String MESSAGE_ERROR_EXCEPTION = "Error interno en el servidor";
     public static final String MESSAGE_ERROR_GET_PRODUCT_NOT_FOUND = "No se encontró ningun regristro bajo ese productId";
 
     //Config
