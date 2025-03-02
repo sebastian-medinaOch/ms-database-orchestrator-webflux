@@ -6,7 +6,6 @@ import com.smo.orchestrator.domain.models.response.ProductResponseModel;
 import com.smo.orchestrator.domain.ports.on.IProductRestOn;
 import com.smo.orchestrator.infrastructure.dataproviders.restclients.response.ProductResponseClient;
 import lombok.RequiredArgsConstructor;
-import org.springframework.core.env.Environment;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.stereotype.Component;
@@ -22,7 +21,6 @@ import static com.smo.orchestrator.infrastructure.commons.constants.Infrastructu
 @RequiredArgsConstructor
 public class ProductRestRestClient implements IProductRestOn {
 
-    private final Environment environment;
     private final WebClient webClientBuilder;
     private final ObjectMapper objectMapper;
 

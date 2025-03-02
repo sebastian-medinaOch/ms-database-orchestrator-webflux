@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import reactor.core.publisher.Mono;
 
+import static com.smo.orchestrator.infrastructure.commons.constants.InfrastructureConstants.LOG_INFO_CONTROLLER_GET_DETAIL_PRODUCT_ID;
+import static com.smo.orchestrator.infrastructure.commons.constants.InfrastructureConstants.LOG_INFO_CONTROLLER_GET_DETAIL_PRODUCT_ID_SUCCESS;
 import static com.smo.orchestrator.infrastructure.commons.constants.InfrastructureConstants.PATH_GET_DETAIL_PRODUCT_ID_CONTROLLER;
 import static com.smo.orchestrator.infrastructure.commons.constants.InfrastructureConstants.PATH_PRODUCT_CONTROLLER;
 import static com.smo.orchestrator.infrastructure.commons.constants.InfrastructureConstants.PATH_VARIABLE_PRODUCT_ID;
@@ -32,8 +34,10 @@ public class EndpointGetDetailProductId {
                                            @RequestHeader(value = REQUEST_HEADER_PRODUCT_ID) String messageId) {
 
         return utility.validateData(productId, messageId)
+                .doFirst(() -> log.info(LOG_INFO_CONTROLLER_GET_DETAIL_PRODUCT_ID, messageId, productId))
                 .then(iGetDetailProductId.get(productId))
-                .map(data -> new AnswerData(DataResponse.builder().data(data).build()).getDataResponse().getData());
+                .map(data -> new AnswerData(DataResponse.builder().data(data).build()).getDataResponse().getData())
+                .doOnSuccess(data -> log.info(LOG_INFO_CONTROLLER_GET_DETAIL_PRODUCT_ID_SUCCESS, messageId, productId));
     }
 
 }

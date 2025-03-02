@@ -28,6 +28,7 @@ public class InfrastructureConstants {
     public static final String LOG_EXCEPTION_NO_RESOURCE_FOUND_EXCEPTION = "Error en la URL: {}";
     public static final String LOG_EXCEPTION_RESPONSE_STATUS_EXCEPTION = "Error HTTP: {}";
     public static final String LOG_EXCEPTION_EXCEPTION = "Error inesperado: {}";
-
+    public static final String LOG_INFO_CONTROLLER_GET_DETAIL_PRODUCT_ID= "Se inicia el proceso para obtener el detalle del producto. MessageId: {} , ProductId: {}";
+    public static final String LOG_INFO_CONTROLLER_GET_DETAIL_PRODUCT_ID_SUCCESS= "Se finalizó el proceso para obtener el detalle del producto. MessageId: {} , ProductId: {}";
 
 }
