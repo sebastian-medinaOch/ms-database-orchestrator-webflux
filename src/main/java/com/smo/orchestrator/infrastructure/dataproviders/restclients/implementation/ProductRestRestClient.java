@@ -14,6 +14,10 @@ import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
+import static com.smo.orchestrator.infrastructure.commons.constants.InfrastructureConstants.CONFIG_URI_GET_PRODUCTS_WEB_CLIENT;
+import static com.smo.orchestrator.infrastructure.commons.constants.InfrastructureConstants.CONFIG_URI_GET_PRODUCT_WEB_CLIENT;
+import static com.smo.orchestrator.infrastructure.commons.constants.InfrastructureConstants.MESSAGE_ERROR_GET_PRODUCT_NOT_FOUND;
+
 @Component
 @RequiredArgsConstructor
 public class ProductRestRestClient implements IProductRestOn {
@@ -26,11 +30,11 @@ public class ProductRestRestClient implements IProductRestOn {
     public Flux<Integer> getProducts(String productId) {
         return webClientBuilder
                 .get()
-                .uri("/product/{productId}/similarids", productId)
+                .uri(CONFIG_URI_GET_PRODUCTS_WEB_CLIENT, productId)
                 .retrieve()
                 .onStatus(HttpStatusCode::is4xxClientError, response ->
                         response.statusCode().equals(HttpStatus.NOT_FOUND)
-                                ? Mono.error(new BussinessException(HttpStatus.NOT_FOUND, "No se encontró ningun regristro bajo ese productId"))
+                                ? Mono.error(new BussinessException(HttpStatus.NOT_FOUND, MESSAGE_ERROR_GET_PRODUCT_NOT_FOUND))
                                 : response.createException().flatMap(Mono::error)
                 )
                 .bodyToFlux(Integer.class)
@@ -40,11 +44,11 @@ public class ProductRestRestClient implements IProductRestOn {
     public Mono<ProductResponseModel> getProduct(String productId) {
         return webClientBuilder
                 .get()
-                .uri("/product/{productId}", productId)
+                .uri(CONFIG_URI_GET_PRODUCT_WEB_CLIENT, productId)
                 .retrieve()
                 .onStatus(HttpStatusCode::is4xxClientError, response ->
                         response.statusCode().equals(HttpStatus.NOT_FOUND)
-                                ? Mono.error(new BussinessException(HttpStatus.NOT_FOUND, "No se encontró ningun regristro bajo ese productId"))
+                                ? Mono.error(new BussinessException(HttpStatus.NOT_FOUND, MESSAGE_ERROR_GET_PRODUCT_NOT_FOUND))
                                 : response.createException().flatMap(Mono::error)
                 )
                 .bodyToMono(ProductResponseClient.class)
