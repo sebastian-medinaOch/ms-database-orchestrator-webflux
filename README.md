@@ -143,9 +143,7 @@ Puedes acceder a la colección de Postman utilizando el siguiente enlace:
 [https://drive.google.com/drive/folders/1MT9f2KIoiqiCcl8TS_Igbrk4-_WgvFUS?usp=sharing](Link)
 
 ## 3. Correr el Microservicio
-
-#### Construir el microservicio con gradle: Comando: gradle build
+#### Se tiene que tener instalado, gradle, docker y docker-compose para probar este repositorio
+#### Construir el microservicio con gradle: Comando: gradle build -> este comando se tiene que ejecutar en la raiz del proyecto
 #### Levantar los contenedores definidos en el docker-compose.yml. Comando: docker-compose up -d simulado influxdb grafana -> este comando se tiene que ejecutar en este respositorio ya que necesita del docker-compose.yml
-#### Construir la imagen del microservicio docker build -t ms-database-orchestrator-webflux .  -> este comando se tiene que ejecutar en este respositorio ya que necesita del Dockerfile
-#### Correr la imagen del microservicio docker run -d -p 5000:5000 --name ms-database-orchestrator-webflux-container ms-database-orchestrator-webflux
 #### Correr la pruebas con k6. Comando: docker-compose run --rm k6 run scripts/test.js

@@ -13,8 +13,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import reactor.core.publisher.Flux;
 
-import static com.smo.orchestrator.infrastructure.commons.constants.InfrastructureConstants.LOG_INFO_CONTROLLER_GET_DETAIL_PRODUCT_ID;
-import static com.smo.orchestrator.infrastructure.commons.constants.InfrastructureConstants.LOG_INFO_CONTROLLER_GET_DETAIL_PRODUCT_ID_SUCCESS;
+import static com.smo.orchestrator.infrastructure.commons.constants.InfrastructureConstants.LOG_INFO_CONTROLLER_GET_SIMILAR_PRODUCTS_IDS;
+import static com.smo.orchestrator.infrastructure.commons.constants.InfrastructureConstants.LOG_INFO_CONTROLLER_GET_SIMILAR_PRODUCTS_IDS_SUCCESS;
 import static com.smo.orchestrator.infrastructure.commons.constants.InfrastructureConstants.PATH_GET_SIMILAR_PRODUCTS_IDS_CONTROLLER;
 import static com.smo.orchestrator.infrastructure.commons.constants.InfrastructureConstants.PATH_PRODUCT_CONTROLLER;
 import static com.smo.orchestrator.infrastructure.commons.constants.InfrastructureConstants.PATH_VARIABLE_PRODUCT_ID;
@@ -34,10 +34,10 @@ public class EndpointGetSimilarProductsIds {
                                               @RequestHeader(value = REQUEST_HEADER_MESSAGE_ID) String messageId) {
 
         return utility.validateData(productId, messageId)
-                .doFirst(() -> log.info(LOG_INFO_CONTROLLER_GET_DETAIL_PRODUCT_ID, messageId, productId))
+                .doFirst(() -> log.info(LOG_INFO_CONTROLLER_GET_SIMILAR_PRODUCTS_IDS, messageId, productId))
                 .thenMany(iGetSimilarProductsIds.get(productId))
                 .map(data -> new AnswerData(DataResponse.builder().data(data).build()).getDataResponse().getData())
-                .doOnComplete(() -> log.info(LOG_INFO_CONTROLLER_GET_DETAIL_PRODUCT_ID_SUCCESS, messageId, productId));
+                .doOnComplete(() -> log.info(LOG_INFO_CONTROLLER_GET_SIMILAR_PRODUCTS_IDS_SUCCESS, messageId, productId));
     }
 
 }

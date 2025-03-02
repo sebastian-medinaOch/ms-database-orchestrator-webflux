@@ -48,26 +48,42 @@ export let options = {
 const host = "http://host.docker.internal:5000";
 
 export function normal() {
-  http.get(host + "/product/1/similar");
+  http.get(host + "/product/1/similarids", getHeaders());
   sleep(0.5);
 }
 
 export function slow() {
-  http.get(host + "/product/2/similar");
+  http.get(host + "/product/2/similarids", getHeaders());
   sleep(0.5);
 }
 
 export function verySlow() {
-  http.get(host + "/product/3/similar");
+  http.get(host + "/product/3/similarids", getHeaders());
   sleep(0.5);
 }
 
 export function notFound() {
-  http.get(host + "/product/4/similar");
+  http.get(host + "/product/4/similarids", getHeaders());
   sleep(0.5);
 }
 
 export function error() {
-  http.get(host + "/product/5/similar");
+  http.get(host + "/product/5/similarids", getHeaders());
   sleep(0.5);
+}
+
+function generateUUID() {
+  return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+    let r = Math.random() * 16 | 0, v = c === 'x' ? r : (r & 0x3 | 0x8);
+    return v.toString(16);
+  });
+}
+
+function getHeaders() {
+  return {
+    headers: {
+      "messageId": generateUUID(), // Generar un ID único por cada request
+      "Content-Type": "application/json"
+    }
+  };
 }

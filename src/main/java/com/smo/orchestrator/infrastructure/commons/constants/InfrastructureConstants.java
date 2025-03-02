@@ -30,6 +30,8 @@ public class InfrastructureConstants {
     public static final String LOG_EXCEPTION_RESPONSE_STATUS_EXCEPTION = "Error HTTP: MessageId: {}, ErrorMessage: {}";
     public static final String LOG_EXCEPTION_EXCEPTION = "Error inesperado: MessageId: {}, ErrorMessage: {}";
     public static final String LOG_INFO_CONTROLLER_GET_DETAIL_PRODUCT_ID = "Se inicia el proceso para obtener el detalle del producto. MessageId: {} , ProductId: {}";
+    public static final String LOG_INFO_CONTROLLER_GET_SIMILAR_PRODUCTS_IDS = "Se inicia el proceso para obtener los productos similares. MessageId: {} , ProductId: {}";
     public static final String LOG_INFO_CONTROLLER_GET_DETAIL_PRODUCT_ID_SUCCESS = "Se finalizó el proceso para obtener el detalle del producto. MessageId: {} , ProductId: {}";
+    public static final String LOG_INFO_CONTROLLER_GET_SIMILAR_PRODUCTS_IDS_SUCCESS = "Se finalizó el proceso para obtener los productos similares. MessageId: {} , ProductId: {}";
 
 }

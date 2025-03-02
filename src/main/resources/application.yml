@@ -5,6 +5,8 @@ spring:
     name: ms-database-orchestrator-webflux
   profiles:
     active: local
+  cache:
+    type: caffeine
 
 management:
   endpoints:

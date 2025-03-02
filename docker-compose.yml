@@ -1,6 +1,8 @@
 services:
   app:
-    build: .
+    build:
+      context: .
+      dockerfile: Dockerfile
     image: ms-database-orchestrator-webflux:latest
     ports:
       - "5000:5000"
