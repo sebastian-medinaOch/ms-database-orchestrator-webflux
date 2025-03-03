@@ -47,9 +47,15 @@ logging:
 
 springdoc:
   api-docs:
+    enabled: true
     path: /v3/api-docs
   swagger-ui:
+    enabled: true
     path: /swagger-ui.html
+    operationsSorter: alpha
+    tagsSorter: alpha
+  packagesToScan: com.smo.orchestrator.infrastructure.controllers
+  pathsToMatch: "/**"
 
 api:
   rest:

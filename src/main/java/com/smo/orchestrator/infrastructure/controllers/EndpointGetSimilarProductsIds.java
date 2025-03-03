@@ -3,7 +3,9 @@ package com.smo.orchestrator.infrastructure.controllers;
 import com.smo.orchestrator.application.response.AnswerData;
 import com.smo.orchestrator.application.response.DataResponse;
 import com.smo.orchestrator.application.services.interfaces.IGetSimilarProductsIds;
+import com.smo.orchestrator.infrastructure.commons.swagger.implementation.GetSimilarProductsIdsApiResponses;
 import com.smo.orchestrator.infrastructure.commons.utility.Utility;
+import io.swagger.v3.oas.annotations.Operation;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,6 +21,7 @@ import static com.smo.orchestrator.infrastructure.commons.constants.Infrastructu
 import static com.smo.orchestrator.infrastructure.commons.constants.InfrastructureConstants.PATH_PRODUCT_CONTROLLER;
 import static com.smo.orchestrator.infrastructure.commons.constants.InfrastructureConstants.PATH_VARIABLE_PRODUCT_ID;
 import static com.smo.orchestrator.infrastructure.commons.constants.InfrastructureConstants.REQUEST_HEADER_MESSAGE_ID;
+import static com.smo.orchestrator.infrastructure.commons.constants.InfrastructureConstants.SWAGGER_GET_SIMILAR_PRODUCTS_IDS;
 
 @Log4j2
 @RestController
@@ -30,6 +33,8 @@ public class EndpointGetSimilarProductsIds {
     private final Utility utility;
 
     @GetMapping(value = PATH_GET_SIMILAR_PRODUCTS_IDS_CONTROLLER)
+    @Operation(summary = SWAGGER_GET_SIMILAR_PRODUCTS_IDS)
+    @GetSimilarProductsIdsApiResponses
     public Flux<Object> getSimilarProductsIds(@PathVariable(PATH_VARIABLE_PRODUCT_ID) String productId,
                                               @RequestHeader(value = REQUEST_HEADER_MESSAGE_ID) String messageId) {
 

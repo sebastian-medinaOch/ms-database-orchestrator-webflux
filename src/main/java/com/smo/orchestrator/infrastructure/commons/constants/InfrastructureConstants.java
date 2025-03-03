@@ -35,4 +35,34 @@ public class InfrastructureConstants {
     public static final String LOG_INFO_CONTROLLER_GET_DETAIL_PRODUCT_ID_SUCCESS = "Se finalizó el proceso para obtener el detalle del producto. MessageId: {} , ProductId: {}";
     public static final String LOG_INFO_CONTROLLER_GET_SIMILAR_PRODUCTS_IDS_SUCCESS = "Se finalizó el proceso para obtener los productos similares. MessageId: {} , ProductId: {}";
 
+    //Swagger constants
+    public static final String SWAGGER_OPEN_API_GROUP = "Microservicio Orquestador de peticiones hacia la base de datos.";
+    public static final String SWAGGER_OPEN_API_PATHS_TO_MATCH = "/**";
+    public static final String SWAGGER_OPEN_API_INFO_TITLE = "Java 21 + Springboot 3.3.5 & OpenAPI";
+    public static final String SWAGGER_OPEN_API_INFO_DESCRIPTION = "Servicio que permite la orquestación, escritura y lectura que se hace hacia la base de datos.";
+    public static final String SWAGGER_OPEN_API_INFO_VERSION = "3.0.0";
+    public static final String SWAGGER_OPEN_API_INFO_CONTACT_NAME = "Sebastian Medina Ochoa";
+    public static final String SWAGGER_OPEN_API_INFO_CONTACT_URL = "https://github.com/sebastian-medinaOch";
+    public static final String SWAGGER_OPEN_API_INFO_CONTACT_EMAIL = "sebasthyy1@gmail.com";
+    public static final String SWAGGER_OPEN_API_COMPONENTS_INFO_TITLE = "Información de contacto";
+    public static final String SWAGGER_OPEN_API_COMPONENTS_INFO_DESCRIPTION = "Servicio que permite la orquestación, escritura y lectura que se hace hacia la base de datos.";
+    public static final String SWAGGER_PACKAGE_INFRASTRUCTURE_CONTROLLERS = "com.smo.orchestrator.infrastructure.controllers;";
+    public static final String SWAGGER_GET_DETAIL_PRODUCT_ID = "Devuelve el detalle del producto para un productId determinado";
+    public static final String SWAGGER_GET_SIMILAR_PRODUCTS_IDS = "Devuelve los productos similares a uno dado ordenados por similitud";
+    public static final String SWAGGER_OPERATIONS_PRODUCTS_API_RESPONSE_200 = "Consulta generada correctamente";
+    public static final String SWAGGER_API_RESPONSE_COMMON_API_400 = "El header 'messageId' es requerido";
+    public static final String SWAGGER_API_RESPONSE_COMMON_API_500 = "Ocurrió un error inesperado";
+    public static final String SWAGGER_ANSWER_EXCEPTION_DESCRIPTION = "Representa la estructura de la respuesta estándar del servicio cuando ocurre una exception";
+    public static final String SWAGGER_ANSWER_DATA_DESCRIPTION = "Representa la estructura de la respuesta estándar del servicio";
+    public static final String SWAGGER_ANSWER_EXCEPTION_STATUS_DESCRIPTION = "Código de estado de la respuesta.";
+    public static final String SWAGGER_ANSWER_EXCEPTION_MESSAGE_DESCRIPTION = "Mensaje de la respuesta.";
+    public static final String SWAGGER_DATA_RESPONSE_DESCRIPTION = "Representa la sub estructura que contiene los datos de la respuesta.";
+    public static final String SWAGGER_DATA_RESPONSE_EXAMPLE = "[[1,2,3]]";
+    public static final String SWAGGER_OBJECT_DESCRIPTION = "Representa la estructura que contiene los datos de la respuesta.";
+    public static final String SWAGGER_OBJECT_EXAMPLE = "[1,2,3]";
+
+    //Utility constants
+    public static final String UTILITY_CODE_STATUS_200 = "200";
+    public static final String UTILITY_CODE_STATUS_400 = "400";
+    public static final String UTILITY_CODE_STATUS_500 = "500";
 }
