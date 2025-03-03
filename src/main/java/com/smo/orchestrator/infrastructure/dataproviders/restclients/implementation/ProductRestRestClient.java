@@ -48,7 +48,6 @@ public class ProductRestRestClient implements IProductRestOn {
      *
      * @param productId identificador del producto base para buscar similares.
      * @return un {@link Flux} de enteros representando los IDs de productos similares.
-     * @throws BussinessException si el producto no se encuentra ({@code 404 Not Found}).
      */
     @Override
     @Cacheable(value = CONFIG_CACHE_SIMILAR_PRODUCTS_IDS)
@@ -76,7 +75,6 @@ public class ProductRestRestClient implements IProductRestOn {
      *
      * @param productId identificador del producto a obtener.
      * @return un {@link Mono} que emite el objeto {@link ProductResponseModel} con la información del producto.
-     * @throws BussinessException si el producto no se encuentra ({@code 404 Not Found}).
      */
     @Cacheable(value = CONFIG_CACHE_PRODUCT)
     public Mono<ProductResponseModel> getProduct(String productId) {

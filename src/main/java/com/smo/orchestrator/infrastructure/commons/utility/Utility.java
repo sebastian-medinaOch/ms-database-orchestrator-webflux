@@ -33,7 +33,6 @@ public class Utility {
      * @param productId identificador único del producto a validar.
      * @param messageId identificador único del mensaje a validar.
      * @return un {@link Mono<Void>} vacío si la validación es exitosa, o un {@link Mono#error} si hay errores.
-     * @throws BussinessException si alguno de los parámetros es nulo o vacío.
      */
     public Mono<Void> validateData(String productId, String messageId) {
         if (isNullOrEmpty(productId)) {
