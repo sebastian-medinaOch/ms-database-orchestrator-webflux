@@ -39,10 +39,10 @@ Esta sección describe los campos que se utilizan en las peticiones y respuestas
 
 ### 2.1 Lista de Endpoints
 
-| Método | Endpoint                          | Descripción                                                       | 
-|:-------|:----------------------------------|:------------------------------------------------------------------|
-| `GET`  | "/product/{productId}/similarids" | Returns the similar products to a given one ordered by similarity |
-| `GET`  | "/product/{productId}"            | Returns the product detail for a given productId                  |
+| Método | Endpoint                          | Descripción                                                         | 
+|:-------|:----------------------------------|:--------------------------------------------------------------------|
+| `GET`  | "/product/{productId}/similarids" | Devuelve los productos similares a uno dado ordenados por similitud |
+| `GET`  | "/product/{productId}"            | Devuelve el detalle del producto para un productId determinado      |
 
 ### 2.2 Detalles del Endpoint
 
@@ -155,14 +155,14 @@ todos los campos de las solicitudes y respuestas. A continuación se detallan al
 ### 4.1.1 Gradle
 
 * **Recomendaciones**
-    * **Version:** Tener instalada la versión de gradle 8.13.
+    * **Version:** Tener instalada la versión de gradle 8.13. (recomendable)
 * **Instalación**
     * **Guia:** Instalar gradle según su pagina oficial: [Pagina Oficial de Gradle](https://gradle.org/install/)
 
 ### 4.1.2 Docker
 
 * **Recomendaciones**
-    * **Version:** Tener instalada la versión __Docker version 27.5.1, build 9f9e405__
+    * **Version:** Tener instalada la versión __Docker version 27.5.1__ (recomendable)
 * **Instalación**
     * **Guia:** Instalar Docker Desktop según su pagina
       oficial: [Pagina Oficial de Docker](https://docs.docker.com/get-started/get-docker/)
@@ -170,7 +170,7 @@ todos los campos de las solicitudes y respuestas. A continuación se detallan al
 ### 4.1.3 Docker Compose
 
 * **Recomendaciones**
-    * **Version:** Tener instalada la versión __Docker Compose version v2.32.4-desktop.1__
+    * **Version:** Tener instalada la versión __Docker Compose version v2.32.4-desktop.1__ (recomendable)
 * **Instalación**
     * **Guia:** Una vez instalado Docker Desktop, Docker Compose viene instalada, pero si no, puedes instalarlo con este
       comando en Linux (Ubuntu/Debian)
@@ -227,9 +227,9 @@ todos los campos de las solicitudes y respuestas. A continuación se detallan al
       este [enlace](https://drive.google.com/drive/folders/1MT9f2KIoiqiCcl8TS_Igbrk4-_WgvFUS?usp=sharing) para importar
       y probar los endpoints.
     * Asegúrate de incluir el header messageId en cada petición.
+    * En el mismo enlace tambien se encuentra un archivo con datos de prueba llamado __datos-prueba.txt__ con los que podras mandar por el productId de los endpoints
 * **Swagger:**
     * Una vez levantado el microservicio y los contenedores, ingresa a la siguiente URL desde tu navegador:
-    * En el mismo enlace tambien se encuentra un archivo con datos de prueba llamado __datos-prueba.txt__ con los que podras mandar por el productId de los endpoints
 
     ~~~
     http://localhost:5000/webjars/swagger-ui/index.html 
