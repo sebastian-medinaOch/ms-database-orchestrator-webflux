@@ -15,6 +15,7 @@ import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 import static com.smo.orchestrator.infrastructure.commons.constants.InfrastructureConstants.CONFIG_CACHE_PRODUCT;
+import static com.smo.orchestrator.infrastructure.commons.constants.InfrastructureConstants.CONFIG_CACHE_SIMILAR_PRODUCTS_IDS;
 import static com.smo.orchestrator.infrastructure.commons.constants.InfrastructureConstants.CONFIG_URI_GET_PRODUCTS_WEB_CLIENT;
 import static com.smo.orchestrator.infrastructure.commons.constants.InfrastructureConstants.CONFIG_URI_GET_PRODUCT_WEB_CLIENT;
 import static com.smo.orchestrator.infrastructure.commons.constants.InfrastructureConstants.MESSAGE_ERROR_GET_PRODUCT_NOT_FOUND;
@@ -27,7 +28,7 @@ public class ProductRestRestClient implements IProductRestOn {
     private final ObjectMapper objectMapper;
 
     @Override
-    @Cacheable(value = CONFIG_CACHE_PRODUCT)
+    @Cacheable(value = CONFIG_CACHE_SIMILAR_PRODUCTS_IDS)
     public Flux<Integer> getProducts(String productId) {
         return webClientBuilder
                 .get()

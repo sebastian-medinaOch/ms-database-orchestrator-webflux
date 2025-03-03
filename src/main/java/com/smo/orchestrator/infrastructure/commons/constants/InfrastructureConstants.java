@@ -21,6 +21,7 @@ public class InfrastructureConstants {
     public static final String CONFIG_URI_GET_PRODUCTS_WEB_CLIENT = "/product/{productId}/similarids";
     public static final String CONFIG_URI_GET_PRODUCT_WEB_CLIENT = "/product/{productId}";
     public static final String CONFIG_CACHE_PRODUCT = "product";
+    public static final String CONFIG_CACHE_SIMILAR_PRODUCTS_IDS = "products";
     public static final String CONFIG_BEAN_CACHE = "cacheProduct";
 
     //Log
