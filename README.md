@@ -142,6 +142,7 @@ todos los campos de las solicitudes y respuestas. A continuación se detallan al
 * Puedes acceder a la colección de Postman utilizando el siguiente enlace:
 
   * [Url de la collections](https://drive.google.com/drive/folders/1MT9f2KIoiqiCcl8TS_Igbrk4-_WgvFUS?usp=sharing)
+  * En el mismo enlace tambien se encuentra un archivo con datos de prueba llamado __datos-prueba.txt__ con los que podras mandar por el productId de los endpoints
 
 ## 4. Correr el Microservicio
 
@@ -228,6 +229,7 @@ todos los campos de las solicitudes y respuestas. A continuación se detallan al
     * Asegúrate de incluir el header messageId en cada petición.
 * **Swagger:**
     * Una vez levantado el microservicio y los contenedores, ingresa a la siguiente URL desde tu navegador:
+    * En el mismo enlace tambien se encuentra un archivo con datos de prueba llamado __datos-prueba.txt__ con los que podras mandar por el productId de los endpoints
 
     ~~~
     http://localhost:5000/webjars/swagger-ui/index.html 
