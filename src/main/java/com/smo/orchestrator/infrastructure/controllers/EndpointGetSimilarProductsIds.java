@@ -23,6 +23,20 @@ import static com.smo.orchestrator.infrastructure.commons.constants.Infrastructu
 import static com.smo.orchestrator.infrastructure.commons.constants.InfrastructureConstants.REQUEST_HEADER_MESSAGE_ID;
 import static com.smo.orchestrator.infrastructure.commons.constants.InfrastructureConstants.SWAGGER_GET_SIMILAR_PRODUCTS_IDS;
 
+/**
+ * Controlador REST que expone un endpoint para obtener los IDs de productos similares
+ * a uno dado, utilizando Spring WebFlux.
+ *
+ * <p>Este endpoint valida primero los datos de entrada (el ID del producto y el ID
+ * del mensaje), registra eventos en el log y devuelve un {@link Flux} con los
+ * productos similares.</p>
+ *
+ * <p>La inyección de dependencias se realiza a través de {@code @RequiredArgsConstructor},
+ * por lo que no se requiere declarar un constructor explícito.</p>
+ *
+ * @author Sebastian Medina Ochoa
+ * @since 1.0
+ */
 @Log4j2
 @RestController
 @RequestMapping(PATH_PRODUCT_CONTROLLER)
@@ -32,6 +46,19 @@ public class EndpointGetSimilarProductsIds {
     private final IGetSimilarProductsIds iGetSimilarProductsIds;
     private final Utility utility;
 
+    /**
+     * Obtiene, de forma reactiva, los productos similares para el ID de producto proporcionado.
+     * <p>
+     * Primero se valida la información de entrada (ID de producto y mensaje). Si la validación
+     * es exitosa, se realiza la invocación al servicio que obtiene los productos similares
+     * y se construye la respuesta en un objeto de tipo {@code AnswerData}.
+     * </p>
+     *
+     * @param productId  identificador único del producto (provenido a través de la URL)
+     * @param messageId  identificador del mensaje (provenido en el encabezado HTTP)
+     * @return un {@link Flux} que emite los IDs de los productos similares
+     * @see IGetSimilarProductsIds
+     */
     @GetMapping(value = PATH_GET_SIMILAR_PRODUCTS_IDS_CONTROLLER)
     @Operation(summary = SWAGGER_GET_SIMILAR_PRODUCTS_IDS)
     @GetSimilarProductsIdsApiResponses
