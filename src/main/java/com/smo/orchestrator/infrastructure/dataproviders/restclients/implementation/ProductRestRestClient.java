@@ -20,6 +20,18 @@ import static com.smo.orchestrator.infrastructure.commons.constants.Infrastructu
 import static com.smo.orchestrator.infrastructure.commons.constants.InfrastructureConstants.CONFIG_URI_GET_PRODUCT_WEB_CLIENT;
 import static com.smo.orchestrator.infrastructure.commons.constants.InfrastructureConstants.MESSAGE_ERROR_GET_PRODUCT_NOT_FOUND;
 
+/**
+ * Cliente REST para la obtención de información de productos desde un servicio externo.
+ *
+ * <p>Esta clase implementa {@link IProductRestOn} y proporciona métodos para recuperar
+ * productos y sus IDs similares a través de peticiones HTTP asíncronas usando {@link WebClient}.</p>
+ *
+ * <p>Las respuestas se almacenan en caché utilizando {@code @Cacheable} para mejorar el rendimiento
+ * y reducir la cantidad de llamadas al servicio externo.</p>
+ *
+ * @author Sebastian Medina Ochoa
+ * @since 1.0
+ */
 @Component
 @RequiredArgsConstructor
 public class ProductRestRestClient implements IProductRestOn {
@@ -27,6 +39,17 @@ public class ProductRestRestClient implements IProductRestOn {
     private final WebClient webClientBuilder;
     private final ObjectMapper objectMapper;
 
+    /**
+     * Obtiene una lista de identificadores de productos similares a un producto dado.
+     * <p>
+     * Se realiza una petición GET al servicio externo, y los resultados se almacenan en caché
+     * bajo la clave definida en {@code CONFIG_CACHE_SIMILAR_PRODUCTS_IDS}.
+     * </p>
+     *
+     * @param productId identificador del producto base para buscar similares.
+     * @return un {@link Flux} de enteros representando los IDs de productos similares.
+     * @throws BussinessException si el producto no se encuentra ({@code 404 Not Found}).
+     */
     @Override
     @Cacheable(value = CONFIG_CACHE_SIMILAR_PRODUCTS_IDS)
     public Flux<Integer> getProducts(String productId) {
@@ -43,6 +66,18 @@ public class ProductRestRestClient implements IProductRestOn {
                 .switchIfEmpty(Flux.empty());
     }
 
+    /**
+     * Obtiene los detalles de un producto específico basado en su identificador.
+     * <p>
+     * Se realiza una petición GET al servicio externo, y la respuesta se convierte a un
+     * {@link ProductResponseModel}. Si el producto no se encuentra, se lanza una excepción
+     * de tipo {@link BussinessException}.
+     * </p>
+     *
+     * @param productId identificador del producto a obtener.
+     * @return un {@link Mono} que emite el objeto {@link ProductResponseModel} con la información del producto.
+     * @throws BussinessException si el producto no se encuentra ({@code 404 Not Found}).
+     */
     @Cacheable(value = CONFIG_CACHE_PRODUCT)
     public Mono<ProductResponseModel> getProduct(String productId) {
         return webClientBuilder
